@@ -1,0 +1,6 @@
+{
+	"platon_binary_url": "https://github.com/luo-dahui/downloads/releases/download/platon/0.13.0/platon-{system}-{arch}.tar.gz",
+	"platon_genesis_url": "https://github.com/luo-dahui/downloads/releases/download/platon/0.13.0/genesis.json",
+	"alaya_binary_url": "https://github.com/luo-dahui/downloads/releases/download/alaya/0.13.1/platon-{system}-{arch}.tar.gz",
+	"alaya_genesis_url": "https://github.com/luo-dahui/downloads/releases/download/alaya/0.13.1/genesis.json"
+}
